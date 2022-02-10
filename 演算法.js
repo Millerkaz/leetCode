@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  *製作亂數ARRAY:
@@ -54,7 +54,10 @@ function mySelection(array) {
         // console.log(arr);
       }
     }
-    [arr[checkedTimes], arr[unsortedMinIndex]] = [arr[unsortedMinIndex], arr[checkedTimes]];
+    [arr[checkedTimes], arr[unsortedMinIndex]] = [
+      arr[unsortedMinIndex],
+      arr[checkedTimes],
+    ];
     checkedTimes++;
   }
   // console.log(arr);
@@ -120,7 +123,10 @@ function myInsertion(array) {
       }
 
       //? 插入左邊 (須注意頭的插入判斷)
-      if ((arr[j - 1] <= arr[i] && arr[i] <= arr[j]) || (j === 0 && arr[i] <= arr[j])) {
+      if (
+        (arr[j - 1] <= arr[i] && arr[i] <= arr[j]) ||
+        (j === 0 && arr[i] <= arr[j])
+      ) {
         // console.log(`未:`, arr[i], ` 已:`, arr[j], `插左`);
         arr.splice(j, 0, arr.splice(i, 1)[0]);
         // console.log(arr);
@@ -204,13 +210,13 @@ function reCheck(target) {
 }
 
 function compare(arr) {
-  while (!arr.every(v => typeof v === 'number')) {
+  while (!arr.every((v) => typeof v === "number")) {
     arr.forEach((v, i) => {
-      if (typeof v === 'string') {
+      if (typeof v === "string") {
         v = JSON.parse(v);
       }
 
-      if (typeof v === 'number') {
+      if (typeof v === "number") {
         return;
       }
       if (v.length === 1) {
@@ -239,7 +245,7 @@ function compare(arr) {
           return;
         }
         if (!reCheckArr.length !== 0) {
-          reCheckArr.forEach(r => {
+          reCheckArr.forEach((r) => {
             newArr.push(JSON.stringify([v[0] + r[0], r[1]]));
           });
         }
@@ -249,7 +255,7 @@ function compare(arr) {
   }
 
   return arr
-    .map(v => {
+    .map((v) => {
       return JSON.parse(v);
     })
     .reduce((acc, cur) => {
@@ -286,3 +292,5 @@ var maxProfit = function (prices) {
 };
 
 //////////////////////////////////////////////////////
+
+

@@ -124,7 +124,7 @@ var countAndSay = function (n) {
 };
 
 //* LeetCode上迭代的解法
-const countAndSay = (n) => {
+const countAndSay2 = (n) => {
   let str = "1";
   while (n > 1) {
     let newStr = "",
