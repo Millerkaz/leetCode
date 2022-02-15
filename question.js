@@ -99,7 +99,7 @@ var strStr = function (haystack, needle) {
  */
 //* 第一次寫到函式遞迴的解法
 
-var countAndSay = function (n) {
+var countAndSay1 = function (n) {
   if (n === 1) {
     return "1";
   }
@@ -124,7 +124,7 @@ var countAndSay = function (n) {
 };
 
 //* LeetCode上迭代的解法
-const countAndSay = (n) => {
+const countAndSay2 = (n) => {
   let str = "1";
   while (n > 1) {
     let newStr = "",
@@ -144,3 +144,78 @@ const countAndSay = (n) => {
   }
   return str;
 };
+
+var numSquares = function (n) {
+  let step = 0;
+
+  function BFS() {
+    let queue = [n];
+    while (queue.length > 0) {
+      for (let i = 0; i < queue.length; i++) {
+        let curr = queue[0];
+        if (curr === 0) {
+          queue = [];
+          break;
+        }
+        for (let i = 1; i <= Math.floor(Math.sqrt(curr)); i++) {
+          queue.push(curr - i ** 2);
+        }
+        queue.shift();
+      }
+      step += 1;
+    }
+    return step;
+  }
+
+  return BFS();
+};
+
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var numSquares2 = function (n) {
+  let dp = {};
+
+  for (let i = 1; i <= Math.floor(Math.sqrt(n)); i++) {
+    dp[i * i] = 1;
+  }
+
+  function BFS(number) {
+    let step = 0;
+    let queue = [number];
+    let min = Infinity;
+
+    a: while (queue.length > 0) {
+      let size = queue.length;
+      for (let i = 0; i < size; i++) {
+        let curr = queue.shift();
+        for (let i = Math.floor(Math.sqrt(curr)); i >= 1; i--) {
+          let next = curr - i * i;
+          if (next === 0) {
+            step++;
+            break a;
+          }
+
+          if (dp[next]) {
+            if (dp[next] + step + 1 <= min) {
+              min = dp[next] + step + 1;
+            }
+          } else {
+            queue.push(next);
+          }
+        }
+      }
+      if (step >= min) {
+        step = min;
+        break a;
+      }
+      step += 1;
+    }
+    return step;
+  }
+
+  return BFS(n);
+};
+
+console.log(numSquares2());
